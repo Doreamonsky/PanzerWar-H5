@@ -3,47 +3,33 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Unity WebGL Player | PanzerWar</title>
+    <title>Panzer War | ShanghaiWindy Produce</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico" />
     <link rel="stylesheet" href="TemplateData/style.css" />
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="Build/UnityLoader.js"></script>
     <script>
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/web.json", { onProgress: UnityProgress });
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/online.json", { onProgress: UnityProgress });
     </script>
-    <script src="http://h.api.4399.com/h5mini-2.0/h5api-interface.php"></script>
+
+    <style>
+      .bg {
+        background: url("Assets/Background.jpg") no-repeat center;
+        background-size: 100%;
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg">
     <div class="webgl-content">
       <div id="unityContainer" style="width: 960px; height: 600px;"></div>
+      <div class="footer">
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">Panzer War</div>
+        <div class="title">Android : <a href="https://play.google.com/store/apps/details?id=com.shanghaiwindy.PanzerWarOpenSource">Link</a></div>
+      </div>
+      <div class="footer">
+        <div class="title">ShanghaiWindy 2014-2020 Produce</div>
+      </div>
     </div>
   </body>
-
-  <script>
-    function PlayAD() {
-      window.h5api.playAd(adCallBack);
-    }
-
-    function adCallBack(obj) {
-      console.log("代码:" + obj.code + ",消息:" + obj.message);
-      if (obj.code === 10000) {
-        console.log("开始播放");
-      } else if (obj.code === 10001) {
-        unityInstance.SendMessage("H5API", "PlayADSuccess");
-        console.log("播放结束");
-      } else {
-        unityInstance.SendMessage("H5API", "PlayADFailure");
-        console.log("广告异常");
-      }
-    }
-
-    function CheckAD() {
-      window.h5api.canPlayAd(checkCallBack);
-    }
-
-    function checkCallBack(data) {
-      unityInstance.SendMessage("H5API", "ADRemain", data.remain);
-      console.log("是否可播放广告", data.canPlayAd, "剩余次数", data.remain);
-    }
-  </script>
 </html>
